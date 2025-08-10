@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Cartão Dia dos Pais</title>
+</head>
+<body>
+
+<!-- SEÇÃO 1: Tela inicial -->
+<section id="inicio">
+    <h1>Feliz Dia dos Pais!</h1>
+    <p>Clique no botão para começar nossa viagem especial ❤️</p>
+    <button onclick="iniciarViagem()">Começar Viagem</button>
+</section>
+
+<!-- SEÇÃO 2: Recado seu -->
+<section id="recado1" style="display:none;">
+    <h2>Recado Meu</h2>
+    <!-- Trocar pelo seu texto -->
+    <p>Escreva aqui sua mensagem para os pais...</p>
+    <!-- Trocar pela sua imagem -->
+    <img src="sua_imagem1.jpg" alt="Foto sua com eles">
+</section>
+
+<!-- SEÇÃO 3: Recado da irmã -->
+<section id="recado2" style="display:none;">
+    <h2>Recado da Minha Irmã</h2>
+    <p>Mensagem dela...</p>
+    <img src="imagem_irma.jpg" alt="Foto da irmã com eles">
+</section>
+
+<!-- SEÇÃO 4: Recado do Dobby -->
+<section id="recado3" style="display:none;">
+    <h2>Recado do Dobby 🐾</h2>
+    <p>"Latido feliz aqui..."</p>
+    <img src="imagem_dobby.jpg" alt="Foto do Dobby">
+</section>
+
+<!-- SEÇÃO 5: Galeria -->
+<section id="galeria" style="display:none;">
+    <h2>Nossa Galeria</h2>
+    <div class="gallery">
+        <!-- Trocar pelas fotos -->
+        <img src="foto1.jpg" alt="">
+        <img src="foto2.jpg" alt="">
+        <img src="foto3.jpg" alt="">
+    </div>
+</section>
+
+<!-- SEÇÃO 6: Mensagem final -->
+<section id="final" style="display:none;">
+    <h2>Obrigado por tudo!</h2>
+    <p>Mesmo sem uma viagem real, nosso amor por vocês é um passeio que nunca acaba.</p>
+    <p>Assinado: [Seu Nome], [Nome da Irmã] e Dobby 🐾</p>
+</section>
+
+<!-- SCRIPT -->
+<script>
+    let secaoAtual = 0;
+    const secoes = ["inicio", "recado1", "recado2", "recado3", "galeria", "final"];
+    let audio;
+
+    function iniciarViagem() {
+        // Música opcional
+        // Trocar "musica.mp3" pelo arquivo da sua música
+        // audio = new Audio("musica.mp3");
+        // audio.play();
+
+        // Começa na sua parte
+        document.getElementById(secoes[secaoAtual]).style.display = "none";
+        secaoAtual = 1; 
+        document.getElementById(secoes[secaoAtual]).style.display = "flex";
+    }
+
+    function proximaSecao() {
+        document.getElementById(secoes[secaoAtual]).style.display = "none";
+        secaoAtual++;
+        if (secaoAtual < secoes.length) {
+            document.getElementById(secoes[secaoAtual]).style.display = "flex";
+        }
+    }
+
+    // Avança ao clicar (exceto na tela inicial)
+    document.body.addEventListener("click", function() {
+        if (secaoAtual > 0 && secaoAtual < secoes.length - 1) {
+            proximaSecao();
+        }
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dia dos Pais - Viagem</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<!-- Vídeo de fundo da tela inicial -->
+<video id="video-fundo" autoplay muted loop>
+  <!-- TROCA AQUI O LINK DO VÍDEO -->
+  <source src="Design sem nome.mp4" type="video/mp4" />
+  Seu navegador não suporta vídeo em background.
+</video>
+<div></div>
+<div id="app">
+
+  <!-- Tela inicial com botão começar -->
+  <div id="tela-inicial">
+  <p id="mensagem-inicial">Feliz Dia dos Pais! Preparado para uma viagem emocionante?</p>
+    <button id="btn-comecar">Começar Viagem</button>
+  </div>
+
+  <!-- Sessão principal com paradas (inicial depois do vídeo) -->
+ <section id="sessao-mapa" class="sessao">
+  <video class="fundo-video" autoplay muted loop>
+    <source src="mapa.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeo.
+  </video>
+  <button id="btn-cachoeira" class="btn-parada" data-sessao="cachoeira">Visitar Cachoeira</button>
+  <button id="btn-cabana" class="btn-parada" data-sessao="cabana">Visitar Cabana</button>
+  <button id="btn-floresta" class="btn-parada" data-sessao="floresta">Visitar Floresta</button>
+  <button id="btn-estacao" class="btn-parada" data-sessao="estacao">Visitar Estação</button>
+  <button id="btn-final" class="btn-parada" data-sessao="sessao-final" style="top: 90%; left: 50%;">Terminar Jornada</button>
+
+</section>
+
+  <!-- Sessões das paradas -->
+  <section id="cachoeira" class="sessao" style="background-image: url(Cachoeira\ da\ Alice\ \(Apresentação\).jpg);">
+    <button class="btn-parada" data-sessao="sessao-mapa">Voltar ao Mapa</button>
+  </section>
+
+  <section id="cabana" class="sessao" style="background-image: url('cabaanaa.jpg');">
+    <button class="btn-parada" data-sessao="sessao-mapa">Voltar ao Mapa</button>
+  </section>
+
+  <section id="floresta" class="sessao" style="background-image: url('feliz\ Dia\ dos\ Pais\ do\ seu\ cachorro\ mais\ fiel\ e\ bagunceiro!\ Valeu\ por\ encher\ meu\ pote\ de\ comida\ \(e\ às\ vezes\ esquecer\,\ mas\ tudo\ bem\,\ eu\ relevo\).\ Valeu\ pelos\ rolês\ no\ parque\ e\ pelos\ petiscos\ secretos.jpg');">
+    <button class="btn-parada" data-sessao="sessao-mapa">Voltar ao Mapa</button>
+  </section>
+
+  <section id="estacao" class="sessao" style="background-image: url('Filho\,\ mesmo\ que\ eu\ não\ esteja\ mais\ aí\ fisicamente\,\ continuo\ te\ acompanhando\ em\ cada\ passo.\ Tenho\ orgulho\ do\ homem\ que\ você\ se\ tornou\ e\ do\ pai\ incrível\ que\ é.\ Sei\ que\ a\ vida\ nem\ sempre\ foi\ fácil\,\ .jpg');">
+    <button class="btn-parada" data-sessao="sessao-mapa">Voltar ao Mapa</button>
+  </section>
+  <!-- NOVA SESSÃO FINAL -->
+<section id="sessao-final" class="sessao" style="background-image: url('Design\ sem\ nome\ \(2\).jpg');">
+  <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; color: rgb(0, 0, 0); text-shadow: 0 0 5px rgb(85, 92, 187);">
+    <h1>Parabéns! Jornada concluída</h1>
+    <p>Obrigado por embarcar nessa viagem especial de Dia dos Pais ❤️</p>
+  </div>
+</section>
+
+
+</div>
+
+<!-- Música que vai tocar e nunca parar -->
+<audio id="musica" loop>
+  <!-- TROCA AQUI O LINK DA MÚSICA -->
+  <source src="Bob Marley - Is This Love (Official Music Video).mp3" type="audio/mpeg" />
+  Seu navegador não suporta áudio.
+</audio>
+
+<script>
+  const btnComecar = document.getElementById('btn-comecar');
+  const videoFundo = document.getElementById('video-fundo');
+  const musica = document.getElementById('musica');
+  const telaInicial = document.getElementById('tela-inicial');
+  const sessoes = document.querySelectorAll('.sessao');
+  const app = document.getElementById('app');
+
+  // Quando clicar no botão começar
+  btnComecar.addEventListener('click', () => {
+    // Esconde tela inicial e vídeo
+    telaInicial.style.display = 'none';
+    videoFundo.style.display = 'none';
+
+    // Mostra a seção do mapa
+    mostrarSessao('sessao-mapa');
+
+    // Começa a tocar a música (sem parar)
+    musica.play().catch(e => {
+      // Se precisar de interação do usuário pra tocar, já tem.
+      console.log('Erro ao tocar música:', e);
+    });
+  });
+
+  // Função para mostrar uma sessão e esconder as outras
+  function mostrarSessao(id) {
+    sessoes.forEach(sessao => {
+      if (sessao.id === id) {
+        sessao.classList.add('ativa');
+      } else {
+        sessao.classList.remove('ativa');
+      }
+    });
+  }
+
+  // Botões dentro das sessões para navegar
+  app.addEventListener('click', e => {
+    if (e.target.classList.contains('btn-parada')) {
+      const destino = e.target.getAttribute('data-sessao');
+      if (destino) {
+        mostrarSessao(destino);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
